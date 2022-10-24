@@ -19,7 +19,10 @@ const ScoreboardItem: FC<IProps> = ({
         {homeName} - {awayName}
       </span>
       <span className="scoreboard-item-score">
-        {typeof homeScore === "number" && typeof awayScore === "number"
+        {typeof homeScore === "number" &&
+        typeof awayScore === "number" &&
+        !isNaN(homeScore) &&
+        !isNaN(awayScore)
           ? `${homeScore} : ${awayScore}`
           : "no data"}
       </span>
