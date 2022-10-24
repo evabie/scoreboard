@@ -5,7 +5,6 @@ export interface IApiDataResponse<T extends object> {
 
 interface ITeamData {
   name: string;
-  logo: string;
 }
 
 // for the sake of excercise I assume all fields may be returned as null
