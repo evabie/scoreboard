@@ -4,10 +4,12 @@
 }
 
 .scoreboard-item-teams {
-  flex: 0 0 300px;
+  flex: 0 0 520px;
+  text-transform: uppercase;
 }
 
 .scoreboard-item-score {
-  flex: 0 0 100px;
-  padding: 0 32px;
+  flex: 0 0 60px;
+  padding: 0 16px;
+  font-weight: 700;
 }

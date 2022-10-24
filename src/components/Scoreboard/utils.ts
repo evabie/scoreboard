@@ -27,7 +27,7 @@ export const filterMatchDataIsValid = (
 export const filterMatches = (data: IMatchData[]): TFilterMatchData[] =>
   data.filter<TFilterMatchData>(filterMatchDataIsValid);
 
-const getSortOrderByDate = (
+export const getSortOrderByDate = (
   matchDateA: string | null,
   matchDateB: string | null
 ): number => {
@@ -50,22 +50,32 @@ const getSortOrderByDate = (
   }
 };
 
+const calculateTotalScore = (
+  homeScore: number | null | undefined,
+  awayScore: number | null | undefined
+): number =>
+  typeof homeScore === "number" &&
+  typeof awayScore === "number" &&
+  !isNaN(homeScore) &&
+  !isNaN(awayScore)
+    ? homeScore + awayScore
+    : -1;
+
 export const sortMatchScoreAndDate = (
   data: TFilterMatchData[]
 ): TFilterMatchData[] =>
   data.sort((a, b) => {
     // sort matches by total score
     // if no score is returned from API but match status is correct display match at the bottom (total score < 0)
-    const aTotalScore =
-      typeof a.stats?.home_score === "number" &&
-      typeof a.stats?.away_score === "number"
-        ? a.stats.home_score + a.stats.away_score
-        : -1;
-    const bTotalScore =
-      typeof b.stats?.home_score === "number" &&
-      typeof b.stats?.away_score === "number"
-        ? b.stats.home_score + b.stats.away_score
-        : -1;
+    const aTotalScore = calculateTotalScore(
+      a.stats?.home_score,
+      a.stats?.away_score
+    );
+
+    const bTotalScore = calculateTotalScore(
+      b.stats?.home_score,
+      b.stats?.away_score
+    );
 
     if (aTotalScore > bTotalScore) {
       return -1;

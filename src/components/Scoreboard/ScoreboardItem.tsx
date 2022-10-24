@@ -5,7 +5,6 @@ interface IProps {
   awayName: string;
   homeScore?: number | null;
   awayScore?: number | null;
-  date?: string | null;
 }
 
 const ScoreboardItem: FC<IProps> = ({
@@ -13,7 +12,6 @@ const ScoreboardItem: FC<IProps> = ({
   homeScore,
   awayName,
   awayScore,
-  date,
 }) => {
   return (
     <div className="scoreboard-item">
@@ -25,7 +23,6 @@ const ScoreboardItem: FC<IProps> = ({
           ? `${homeScore} : ${awayScore}`
           : "no data"}
       </span>
-      {date}
     </div>
   );
 };
